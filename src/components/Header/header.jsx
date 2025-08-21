@@ -10,7 +10,7 @@ import { useCart } from "../context/CartContext";
 import logo from '../../assets/logo.png';
 import SearchIcon from '../../assets/search.png';
 import AddtoCart from '../../assets/addtocart.png';
-import ProfileIcon from '../../assets/Signup.png';
+import ProfileIcon from '../../assets/signup.png';
 import LocationLogo from '../../assets/Location.png';
 import MenuIcon from '../../assets/menu.png';
 import CloseIcon from '../../assets/close.png';
