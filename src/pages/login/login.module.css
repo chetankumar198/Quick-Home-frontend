@@ -1,0 +1,202 @@
+.loginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f4f6f8;
+    padding: 2rem;
+  }
+  
+  .loginForm {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+  }
+  
+  .loginForm h2 {
+    font-size: 1.8rem;
+    color: #222;
+    margin-bottom: 1.5rem;
+  }
+  
+  .inputGroup {
+    margin-bottom: 1.2rem;
+    text-align: left;
+  }
+  
+  .inputGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    color: #333;
+  }
+  
+  .inputGroup input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fafafa;
+    transition: border 0.3s ease;
+  }
+  
+  .inputGroup input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .loginBtn {
+    width: 100%;
+    padding: 0.9rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 0.5rem;
+  }
+  
+  .loginBtn:hover {
+    background-color: #0056b3;
+  }
+  
+  .orDivider {
+    margin: 1.5rem 0;
+    position: relative;
+    text-align: center;
+    color: #999;
+    font-size: 0.95rem;
+  }
+  
+  .orDivider span {
+    background-color: #fff;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .orDivider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+  
+  .googleBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .googleBtn:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .googleBtn img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .signupLink {
+    margin-top: 1.2rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .signupLink a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .signupLink a:hover {
+    text-decoration: underline;
+  }
+  .otpBoxGroup {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 1.2rem 0 1.5rem;
+}
+
+.otpInput {
+  width: 42px;
+  height: 48px;
+  font-size: 20px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fafafa;
+  transition: all 0.3s ease;
+}
+
+.otpInput:focus {
+  border-color: #007bff;
+  background-color: #fff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+.toggleOtp {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #444;
+}
+
+.toggleOtp button {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: 5px;
+  padding: 0;
+  font-size: 0.95rem;
+}
+
+.toggleOtp button:hover {
+  text-decoration: underline;
+}
+.resendOtp {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #444;
+  text-align: center;
+}
+
+.resendBtn {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.resendBtn:hover {
+  text-decoration: underline;
+}
+
+  

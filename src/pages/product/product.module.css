@@ -1,0 +1,257 @@
+/* General Styling */
+.productPage {
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #a6c1ee, #fbc2eb);
+    text-align: center;
+   
+    width: 100%;
+    padding-top: 100px;
+}
+
+/* Page Title */
+.pageTitle {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Service Cards */
+.servicesContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Individual Service Card */
+.serviceCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    width: 85%;
+    max-width: 1000px;
+    transition: all 0.3s ease-in-out;
+    backdrop-filter: blur(10px);
+}
+
+.serviceCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Service Image */
+.serviceImage {
+    width: 180px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.serviceImage:hover {
+    transform: scale(1.05);
+}
+
+/* Service Details */
+.serviceDetails {
+    flex: 1;
+    text-align: left;
+    padding-left: 15px;
+}
+
+.serviceName {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 5px;
+}
+
+.servicePrice {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #000000;
+}
+
+/* Book Now Button */
+.bookNow {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.bookNow:hover {
+    background: linear-gradient(135deg, #0056b3, #003d7a);
+    transform: scale(1.05);
+}
+
+/* Modern Modal Styling */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+    width: 350px;
+    text-align: center;
+    z-index: 1000;
+    backdrop-filter: blur(12px);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -55%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.modalTitle {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Gender Selection */
+.modalOptions {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.modalOption {
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+}
+
+.modalOption img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.modalOption:hover {
+    transform: scale(1.2);
+}
+
+/* Service Details Inside Modal */
+.details {
+    text-align: left;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Quantity Selection */
+.quantityContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 15px 0;
+}
+
+/* Quantity Buttons */
+.quantityBtn {
+    background: transparent;
+    border: 2px solid #6a0dad;
+    color: #6a0dad;
+    padding: 6px 14px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.quantityBtn:hover {
+    color: black;
+    border-color: black;
+}
+
+/* Quantity Value */
+.quantityValue {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #222;
+}
+
+/* Add to Cart Button */
+.addToCartButton {
+    background: linear-gradient(135deg, #6a00ff, #4a00b3);
+    color: white;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin-right: 15px;
+}
+
+.addToCartButton:hover {
+    background: linear-gradient(135deg, #4a00b3, #2a007a);
+    transform: scale(1.05);
+}
+
+/* Close Button */
+.closeButton {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.closeButton:hover {
+    background: darkred;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .servicesContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .serviceCard {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        width: 90%;
+    }
+
+    .serviceImage {
+        width: 100%;
+        height: auto;
+        margin-bottom: 15px;
+    }
+
+    .modal {
+        width: 90%;
+    }
+}

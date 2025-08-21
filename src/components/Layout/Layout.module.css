@@ -1,0 +1,41 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevents body scrolling */
+  }
+  
+  .contentWrapper {
+    flex: 1;
+    overflow-y: auto; /* Enables scrolling */
+    padding: 20px;
+    scrollbar-width: thin; /* Custom thin scrollbar for Firefox */
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+    scroll-behavior: smooth; /* Smooth scrolling effect */
+  }
+  
+  /* For WebKit-based browsers (Chrome, Edge, Safari) */
+  .contentWrapper::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .contentWrapper::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+  }
+  
+  .footer {
+    margin-top: auto; /* Ensures footer is always at the bottom */
+  }
+
+  /* 📱 Responsive Design */
+@media (max-width: 768px) {
+    .contentWrapper {
+      padding: 10px; /* Reduce padding on smaller screens */
+    }
+  
+    .header {
+      padding: 10px 15px; /* Adjust header padding for smaller screens */
+    }
+  }
+  

@@ -1,0 +1,115 @@
+/* Overall Page Styling */
+.contactContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* min-height: 100vh; */
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    padding:100px;
+}
+
+/* Contact Form Box */
+.contactBox {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    color: white;
+}
+
+/* Title & Description */
+.contactBox h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.contactBox p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #f1f1f1;
+}
+
+/* Input Fields */
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input,
+.textarea {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: 0.3s;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    outline: none;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: #e0e0e0;
+}
+
+.input:focus,
+.textarea:focus {
+    background: rgba(255, 255, 255, 0.3);
+    border-left: 4px solid #ffd700;
+    padding-left: 16px;
+}
+
+/* Textarea Styling */
+.textarea {
+    height: 120px;
+    resize: none;
+}
+
+/* Submit Button */
+.submitButton {
+    background: #ffd700;
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submitButton:hover {
+    background: #ffcc00;
+    transform: scale(1.05);
+}
+
+/* Help Section */
+.helpSection {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.helpSection h3 {
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+.helpLink,
+.emailLink {
+    color: #ffd700;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.helpLink:hover,
+.emailLink:hover {
+    text-decoration: underline;
+}

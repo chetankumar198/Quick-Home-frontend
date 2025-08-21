@@ -1,0 +1,661 @@
+/* 🔹 Fixed Header Styling */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background-color: #dbeeff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 2%;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+/* Sidebar Menu Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Hidden initially */
+    width: 250px;
+    height: 100vh;
+    background: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .sidebarOpen {
+    left: 0; /* Slide in */
+  }
+  
+  .sidebarLink {
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .sidebarLink:hover {
+    background: #f0f0f0;
+  }
+  
+  .closeIcon {
+    width: 25px;
+    cursor: pointer;
+    margin-top: 150px;
+  }
+  
+  /* Menu Icon */
+  .menuIcon {
+    width: 30px;
+    cursor: pointer;
+    display: none;
+  }
+  
+  /* Show menu icon only on small screens */
+  @media (max-width: 768px) {
+    .menuIcon {
+      display: block;
+    }
+  
+    .navLinks {
+      display: none; /* Hide normal nav on small screens */
+    }
+  }
+  
+ 
+  
+  /* 🔹 Responsive Design */
+  @media (max-width: 768px) {
+      .header {
+          flex-direction: column;
+          height: auto;
+          padding: 10px;
+      }
+      .navigation {
+          width: 100%;
+          justify-content: center;
+      }
+      .navLinks {
+          flex-direction: column;
+          row-gap: 15px;
+          margin: 10px 0;
+      }
+      .search {
+          width: 100%;
+          justify-content: center;
+          margin-top: 10px;
+      }
+      .SearchBox {
+          width: 90%;
+      }
+      .LocationBox {
+          width: 90%;
+          justify-content: center;
+          margin-top: 10px;
+      }
+      .CartIcon, .ProfileIcon {
+          margin: 10px;
+      }
+      .profileDropdown {
+          right: 50%;
+          transform: translateX(50%);
+      }
+  }
+  
+  /* 🔹 Navigation */
+  .navigation {
+      width: 40%;
+      height: 70px;
+      display: flex;
+  }
+  
+  .navigation img {
+      width: 180px; /* Adjust size */
+      height: auto;
+      margin-right: 50px; /* Space between logo and nav links */
+      margin-left: 40px;
+      margin-top: 5px;
+  }
+  
+  .logo {
+      margin-bottom: 5px;
+      width: fit-content;
+      display: flex;
+  }
+  
+  /* 🔹 Navbar Links */
+  .navLinks {
+      width: fit-content;
+      display: flex;
+      list-style-type: none;
+      column-gap: 35px;
+      margin-left: 50px;
+      align-items: center;
+  }
+  
+  /* 🔹 Default link styling */
+  .link {
+      text-decoration: none;
+      color: rgb(130, 22, 22);
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 5px; /* Space for underline */
+      transition: color 0.3s ease;
+  }
+  
+  /* 🔹 Add underline effect only when active */
+  .activeLink {
+      text-decoration: none;
+      color: #000; /* Change color when active */
+      font-weight: bold;
+      position: relative;
+      padding-bottom: 5px;
+  }
+  
+  /* 🔹 Underline effect for active link */
+  .activeLink::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px; /* Adjust to keep spacing */
+      width: 100%;
+      height: 3px;
+      background-color: black;
+      border-radius: 2px;
+  }
+  
+  /* 🔹 Smooth transition for hover */
+  .link:hover {
+      color: black;
+  }
+  
+  /* 🔹 Search & Location Box */
+  .search {
+      width: 30%;
+      height: 70px;
+      background-color: #dbeeff;
+      display: flex;
+  }
+  
+  .HeaderIcon {
+      width: 7%;
+      height: min-content;
+      margin-top: 2px;
+      margin-left: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  
+ /* Search Box Container */
+.SearchBox {
+    display: flex;
+    align-items: center;
+    background: white;
+    margin-top: 14px;
+    padding: 6px 12px;
+    margin-left: 100px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    border: 1.5px solid transparent;
+    width: 250px;
+    height: 36px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Search Icon */
+.HeaderIcon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Search Input */
+.SearchInput {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+    transition: all 0.3s ease-in-out;
+    color: #333;
+    margin-top: 19px;
+    font-weight: 500;
+}
+
+/* Glow Effect on Focus */
+.SearchBox:focus-within {
+    border: 1.5px solid #00bcd4; /* Stylish glowing border */
+    box-shadow: 0 0 8px rgba(0, 188, 212, 0.4);
+    transform: scale(1.02);
+}
+
+/* Subtle Icon Animation */
+.SearchBox:hover .HeaderIcon {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Input Placeholder Animation */
+.SearchInput::placeholder {
+    color: #888;
+    transition: all 0.3s ease-in-out;
+}
+
+.SearchInput:focus::placeholder {
+    color: transparent;
+}
+
+/* Optional - Add a Soft Gradient Background on Hover */
+.SearchBox:hover {
+    background: linear-gradient(to right, #ffffff, #f3f3f3);
+}
+.searchSuggestionsContainer {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%; /* Ensure it matches the search box width */
+    max-width: 400px; /* Adjust based on your search box width */
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.trendingTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: #777;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    margin: 0 10px;
+}
+
+.searchSuggestions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.searchSuggestionItem {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease-in-out;
+    border-radius: 5px;
+}
+
+.searchSuggestionItem:hover {
+    background: #007bff;
+    color: white;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}.searchSuggestionsContainer {
+    position: absolute;
+    top: 70px;
+    left: 1020px;
+    width: 100%; /* Ensure it matches the search box width */
+    max-width: 180px; /* Adjust based on your search box width */
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.trendingTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: #777;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    margin: 0 10px;
+}
+
+.searchSuggestions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.searchSuggestionItem {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease-in-out;
+    border-radius: 5px;
+}
+
+.searchSuggestionItem:hover {
+    background: #007bff;
+    color: white;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+  
+ /* 🔹 Cart & Signup Icons */
+
+/* Cart Icon */
+.addToCart {
+    position: relative;
+    cursor: pointer;
+    margin-right: 50px; /* Reduced space */
+    display: flex;
+    align-items: center;
+}
+
+.CartIcon {
+    width: 28px;
+    margin-top: 6px;
+    margin-right: 10px; /* Adjusted spacing */
+    transition: transform 0.3s ease-in-out;
+}
+
+.CartIcon:hover {
+    transform: scale(1.1);
+}
+
+/* Cart Counter */
+.cartCount {
+    position: absolute;
+    top: -2px;
+    right: 2px;
+    background: rgb(242, 88, 88);
+    color: rgb(255, 255, 255);
+    font-size: 11px;
+    font-weight: bold;
+    width: 20px;
+    height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+
+
+.ProfileIcon {
+    width: 26px;
+    margin-right: 100px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.ProfileIcon:hover {
+    transform: scale(1.1);
+}
+
+
+  /* Location Box Container */
+.LocationBox {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 8px 14px;
+    border-radius: 25px;
+    margin-left: 80px;
+    margin-top: -6px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+    border: 1.8px solid transparent;
+    width: 280px;
+    height: 42px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Location Icon */
+.locationlogo {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Location Input */
+.LocationInput {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    background: transparent;
+    color: #333;
+    font-weight: 500;
+    margin-top: 18px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Glow Effect on Focus */
+.LocationBox:focus-within {
+    border: 1.5px solid #00bcd4; /* Stylish glowing border */
+    box-shadow: 0 0 8px rgba(0, 188, 212, 0.4);
+    transform: scale(1.02);
+}
+
+/* Subtle Icon Animation */
+.LocationBox:hover .locationlogo {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Input Placeholder Animation */
+.LocationInput::placeholder {
+    color: #aaa;
+    transition: all 0.3s ease-in-out;
+}
+
+.LocationInput:focus::placeholder {
+    color: transparent;
+}
+
+/* Location Popup */
+.locationPopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    width: 420px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    z-index: 1001;
+}
+
+.popupHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.popupHeader h3 {
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+}
+
+.popupHeader button {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #888;
+}
+
+
+
+.suggestionsList {
+    display: block;  /* Ensure it’s not hidden */
+    position: absolute;
+    background: white;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    z-index: 1000;
+  }
+  
+
+.suggestionsList li {
+    padding: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 14px;
+}
+
+.suggestionsList li:hover {
+    background: #f7f7f7;
+}
+
+/* Buttons */
+.useLocationBtn,
+.confirmBtn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #000000;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 12px;
+    transition: background 0.3s;
+}
+
+.useLocationBtn:hover,
+.confirmBtn:hover {
+    background: #2b472d;
+}
+
+/* Map Styles */
+.mapContainer {
+    height: 260px;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 12px;
+    border: 1px solid #ddd;
+}
+
+@media (max-width: 480px) {
+    .locationPopup {
+        width: 90%;
+    }
+
+    .LocationInput {
+        width: 100%;
+    }
+}
+
+.accountWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.accountButton {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.ProfileIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.profileText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
+}
+
+.helloText {
+  font-size: 12px;
+  color: #878787;
+  font-weight: 400;
+}
+
+.usernameText {
+  font-size: 14px;
+  color: #212121;
+  font-weight: 400;
+}
+.accountWrapper {
+  position: relative;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+}
+
+.dropdownMenu button {
+  background: none;
+  border: none;
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.dropdownMenu button:hover {
+  background-color: #f0f0f0;
+}
+
+  
+  
+
+

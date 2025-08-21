@@ -1,0 +1,128 @@
+/* Footer.module.css */
+
+.footer {
+    background: #dff2f9;
+    /* color: #333; */
+    padding: 20px 20px;
+    text-align: center;
+    display: flex;
+    border-top: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logoSection {
+    margin-bottom: 20px;
+}
+
+.Company {
+    width: 200px;
+    margin-bottom: 10px;
+    margin-right: 990px;
+}
+
+.linksContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 30px;
+    flex-wrap: nowrap;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.column {
+    text-align: left;
+    flex: 1;
+    min-width: 200px;
+    margin: 0 15px;
+}
+
+.column h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #444;
+    font-weight: bold;
+}
+
+.column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.column ul li {
+    margin: 8px 0;
+}
+
+.column ul li a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.column ul li a:hover {
+    color: #007bff;
+}
+
+.socialIcons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-left: -100px;
+    margin-top: 10px;
+}
+
+.socialIcons a {
+    font-size: 26px;
+    color: #000;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.socialIcons a:hover {
+    color: #007bff;
+    transform: scale(1.1);
+}
+
+.bottom {
+    margin-top: 25px;
+    font-size: 0.9rem;
+    color: #777;
+    text-align: center;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .linksContainer {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .column {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .socialIcons {
+        justify-content: center;
+    }
+}
+/* 📱 Responsive Footer */
+@media (max-width: 768px) {
+    .footer {
+      padding: 15px 10px; /* Adjust padding */
+      font-size: 14px; /* Make text smaller */
+    }
+  }

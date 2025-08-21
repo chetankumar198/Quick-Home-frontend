@@ -1,0 +1,113 @@
+.signupContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #dbeafe, #f0f9ff);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+}
+
+.signupForm {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.signupForm h2 {
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #1f2937;
+  font-weight: 600;
+  text-align: center;
+}
+
+.inputGroup {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.inputGroup label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+.inputGroup input:focus {
+  border-color: #3b82f6;
+  background-color: #fff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.error {
+  font-size: 13px;
+  color: #dc2626;
+  margin-top: 5px;
+  display: block;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  background: linear-gradient(to right, #3b82f6, #2563eb);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+  margin-top: 10px;
+}
+
+.submitBtn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+}
+
+.signinLink {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #4b5563;
+  text-align: center;
+}
+
+.signinLink a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.signinLink a:hover {
+  text-decoration: underline;
+}
