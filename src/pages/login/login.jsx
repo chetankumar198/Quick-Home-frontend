@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import styles from './Login.module.css';
+import "./login.module.css";
+
 import { auth } from '../../firebase';
 import {
   signInWithPhoneNumber,
