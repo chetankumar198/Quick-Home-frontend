@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './payment.module.css';
 import { useCart } from '../../components/context/CartContext';
-import { FaCashRegister, FaCreditCard } from 'react-icons/fa';  // Payment icons
+import { FaCashRegister, FaCreditCard } from 'react-icons/fa';
 
 import Maid from '../../assets/maid.webp';
 import Cook from '../../assets/chef.webp';
@@ -40,17 +40,15 @@ const Checkout = () => {
     state: '',
     landmark: '',
   });
-
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const totalPrice = cart.reduce(
     (acc, item) => acc + (servicePrices[item.service] || 0) * item.quantity,
     0
   );
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const validate = () => {
     const newErrors = {};
@@ -83,29 +81,30 @@ const Checkout = () => {
         quantity: item.quantity,
         price: servicePrices[item.service] * item.quantity,
       })),
-      totalPrice: totalPrice,
-      paymentMethod: paymentMethod,
+      totalPrice,
+      paymentMethod,
     };
 
+    setLoading(true);
     try {
       const response = await fetch("http://localhost:5000/api/orders/place-order", {
-
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderData),
+        mode: 'cors', // ensures proper CORS
       });
 
       const data = await response.json();
       if (response.ok) {
-        alert(data.message);  // Show success message
+        alert(data.message || "Order placed successfully!");
       } else {
-        alert("Error placing order");
+        alert(data.message || "Error placing order");
       }
     } catch (error) {
       console.error(error);
-      alert("Error placing order");
+      alert("Network or server error. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -117,11 +116,7 @@ const Checkout = () => {
         <h3>Service Summary</h3>
         {cart.map((item, index) => (
           <div key={index} className={styles.itemCard}>
-            <img
-              src={serviceImages[item.service]}
-              alt={item.service}
-              className={styles.itemImage}
-            />
+            <img src={serviceImages[item.service]} alt={item.service} className={styles.itemImage} />
             <div>
               <h4>{item.service.charAt(0).toUpperCase() + item.service.slice(1)}</h4>
               <p>Gender: {item.gender}</p>
@@ -136,53 +131,50 @@ const Checkout = () => {
 
       <div className={styles.section}>
         <h3>Delivery Details</h3>
-        <input type="text" name="name" placeholder="Full Name" value={form.name} onChange={handleChange} className={styles.input} />
-        {errors.name && <p className={styles.error}>{errors.name}</p>}
-
-        <input type="text" name="phone" placeholder="Phone Number" value={form.phone} onChange={handleChange} className={styles.input} />
-        {errors.phone && <p className={styles.error}>{errors.phone}</p>}
-
-        <textarea name="address" placeholder="Full Address (House No, Street, Area)" value={form.address} onChange={handleChange} className={styles.textarea} />
-        {errors.address && <p className={styles.error}>{errors.address}</p>}
-
-        <input type="text" name="pincode" placeholder="Pincode" value={form.pincode} onChange={handleChange} className={styles.input} />
-        {errors.pincode && <p className={styles.error}>{errors.pincode}</p>}
-
-        <input type="text" name="city" placeholder="City" value={form.city} onChange={handleChange} className={styles.input} />
-        {errors.city && <p className={styles.error}>{errors.city}</p>}
-
-        <input type="text" name="state" placeholder="State" value={form.state} onChange={handleChange} className={styles.input} />
-        {errors.state && <p className={styles.error}>{errors.state}</p>}
-
-        <input type="text" name="landmark" placeholder="Landmark (optional)" value={form.landmark} onChange={handleChange} className={styles.input} />
+        {["name","phone","address","pincode","city","state","landmark"].map(field => (
+          field !== "address" && field !== "landmark" ? (
+            <div key={field}>
+              <input
+                type="text"
+                name={field}
+                placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                value={form[field]}
+                onChange={handleChange}
+                className={styles.input}
+              />
+              {errors[field] && <p className={styles.error}>{errors[field]}</p>}
+            </div>
+          ) : field === "address" ? (
+            <div key={field}>
+              <textarea
+                name="address"
+                placeholder="Full Address (House No, Street, Area)"
+                value={form.address}
+                onChange={handleChange}
+                className={styles.textarea}
+              />
+              {errors.address && <p className={styles.error}>{errors.address}</p>}
+            </div>
+          ) : (
+            <input key={field} type="text" name="landmark" placeholder="Landmark (optional)" value={form.landmark} onChange={handleChange} className={styles.input} />
+          )
+        ))}
       </div>
 
       <div className={styles.section}>
         <h3>Payment Method</h3>
         <label className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="payment"
-            value="cash"
-            checked={paymentMethod === 'cash'}
-            onChange={(e) => setPaymentMethod(e.target.value)}
-          />
+          <input type="radio" name="payment" value="cash" checked={paymentMethod === 'cash'} onChange={(e) => setPaymentMethod(e.target.value)} />
           <FaCashRegister /> Payment with cash
         </label>
         <label className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="payment"
-            value="online"
-            checked={paymentMethod === 'online'}
-            onChange={(e) => setPaymentMethod(e.target.value)}
-          />
+          <input type="radio" name="payment" value="online" checked={paymentMethod === 'online'} onChange={(e) => setPaymentMethod(e.target.value)} />
           <FaCreditCard /> Online Payment
         </label>
       </div>
 
-      <button className={styles.orderBtn} onClick={handleOrder}>
-        Place Order
+      <button className={styles.orderBtn} onClick={handleOrder} disabled={loading}>
+        {loading ? "Placing Order..." : "Place Order"}
       </button>
     </div>
   );

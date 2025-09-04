@@ -3,111 +3,157 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #dbeafe, #f0f9ff);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #d9c4f0 0%, #2575fc 100%);
   padding: 20px;
 }
 
 .signupForm {
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 20px;
-  padding: 40px;
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 16px;
   width: 100%;
-  max-width: 420px;
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  max-width: 400px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
 .signupForm h2 {
-  font-size: 28px;
-  margin-bottom: 25px;
-  color: #1f2937;
-  font-weight: 600;
   text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+}
+
+/* Toggle Buttons */
+.toggleButtons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.toggleBtn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #f5f5f5;
+  color: #333;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggleBtn:hover {
+  background: #e0e0e0;
+}
+
+.active {
+  background: #2575fc;
+  color: white;
 }
 
 .inputGroup {
-  margin-bottom: 20px;
-  text-align: left;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .inputGroup label {
   font-size: 14px;
-  font-weight: 600;
-  color: #374151;
+  font-weight: 500;
   margin-bottom: 6px;
-  display: block;
+  color: #333;
 }
 
 .inputGroup input {
-  width: 100%;
-  padding: 12px 14px;
-  font-size: 15px;
-  border: 1px solid #d1d5db;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: #f9fafb;
-  transition: all 0.3s ease;
+  outline: none;
+  transition: border 0.2s ease;
 }
 
 .inputGroup input:focus {
-  border-color: #3b82f6;
-  background-color: #fff;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  border-color: #2575fc;
+  box-shadow: 0 0 4px rgba(37, 117, 252, 0.3);
 }
 
 .error {
-  font-size: 13px;
-  color: #dc2626;
-  margin-top: 5px;
-  display: block;
+  font-size: 12px;
+  color: red;
+  margin-top: 4px;
 }
 
 .submitBtn {
   width: 100%;
-  padding: 14px;
-  font-size: 16px;
-  background: linear-gradient(to right, #3b82f6, #2563eb);
-  color: white;
+  padding: 12px;
+  margin-top: 8px;
+  background: #2575fc;
   border: none;
-  border-radius: 8px;
+  color: #fff;
+  font-size: 15px;
   font-weight: 600;
+  border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s ease;
-  margin-top: 10px;
+  transition: background 0.2s ease;
 }
 
 .submitBtn:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(to right, #2563eb, #1d4ed8);
+  background: #1a5ed6;
 }
 
 .signinLink {
-  margin-top: 20px;
-  font-size: 14px;
-  color: #4b5563;
   text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
 }
 
 .signinLink a {
-  color: #3b82f6;
+  color: #2575fc;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .signinLink a:hover {
   text-decoration: underline;
+}
+.otpContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.otpInput {
+  width: 45px;
+  height: 50px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.otpInput:focus {
+  border-color: #667eea;
+  box-shadow: 0px 0px 5px rgba(102, 126, 234, 0.4);
+}
+
+.resendBtn {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: #667eea;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  display: block;
+  text-align: center;
+}
+
+.resendBtn:hover {
+  color: #5563c1;
 }
