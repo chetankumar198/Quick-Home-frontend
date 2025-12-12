@@ -115,7 +115,7 @@ const ProductPage = () => {
                                 <p><strong>Service:</strong> {selectedService}</p>
                                 <p><strong>Preferred Gender:</strong> {selectedGender}</p>
                                 <p><strong>Duration:</strong> 55 min</p>
-                                <p><strong>Price:</strong> ${servicePrices[selectedService] * quantity}</p>
+                                <p><strong>Price:</strong> ₹{servicePrices[selectedService] * quantity}</p>
                             </div>
                             <div className={styles.quantityContainer}>
                                 <button className={styles.quantityBtn} onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>

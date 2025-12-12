@@ -1,311 +1,207 @@
-/* 🔹 Section: Righttest */
-.Righttest {
-  width: 100%;
-  background-color: #F8FBFF;
+.section {
   padding: 40px 20px;
-  text-align: center;
-}
-
-/* 🔹 Title */
-.servicetitle {
-  font-size: 32px;
-  font-weight: bold;
-  color: #222;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 20px;
-}
-
-/* 🔹 Scroll Container */
-.scrollContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-/* 🔹 Scroll Buttons */
-.scrollButton {
-  background: #f8f8f9;
-  border: none;
-  color: #000;
-  padding: 10px;
-  font-size: 20px;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: 0.3s ease;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.scrollButton:hover {
-  background: #d4dae0;
-  transform: scale(1.1);
-}
-
-/* 🔹 Services Wrapper */
-.servicesWrapper {
-  width: 100%;
-  max-width: 1000px;
-  overflow: hidden;
-  border-radius: 12px;
+  max-width: 1180px;
   margin: auto;
 }
 
-/* 🔹 Services Container */
-.servicesContainer {
-  display: flex;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  gap: 20px;
-  padding: 10px;
-  white-space: nowrap;
-}
-
-/* 🔹 Service Box */
-.serviceBox {
-  width: 300px;
-  background: linear-gradient(135deg, #ffffff, #f8f9fa);
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.title {
+  font-size: 26px;
+  font-weight: 700;
   text-align: center;
-  transition: 0.3s ease;
-  flex-shrink: 0;
+  margin-bottom: 30px;
+  color: #111827;
 }
 
-.serviceBox:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+/* ==== Scroll Section ==== */
+.scrollRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
 }
 
-.serviceBox img {
-  width: 50%;
-  height: 100px;
-  border-radius: 18px;
-  object-fit: cover;
-}
-
-.serviceBox p {
-  margin-top: 12px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #222;
-}
-
-/* 🔹 Service Button */
-.serviceButton {
-  margin-top: 12px;
-  background: #070707;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 14px;
-  font-size: 15px;
-  font-weight: bold;
+.arrowBtn {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  padding: 12px;
+  border-radius: 50%;
   cursor: pointer;
-  transition: 0.3s ease;
+  font-size: 16px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  transition: transform .15s;
 }
 
-.serviceButton:hover {
-  background: #353434;
+.arrowBtn:hover {
   transform: scale(1.08);
 }
 
-/* 🔹 Modal Container */
-.boxContainer {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 450px;
-  text-align: center;
-  z-index: 999;
-}
-
-/* 🔹 Modal Title */
-.modalTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 15px;
-}
-
-/* 🔹 Modal Options */
-.modalOptions {
+.cardsWrapper {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
 }
 
-.modalOption {
-  cursor: pointer;
-  text-align: center;
-  padding: 10px;
-  border-radius: 8px;
-  transition: 0.3s ease;
+.cardsWrapper::-webkit-scrollbar {
+  display: none;
 }
 
-.modalOption:hover {
-  background-color: #f1f1f1;
+/* ==== Card ==== */
+.card {
+  min-width: 240px;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  transition: transform .15s ease, box-shadow .15s ease;
 }
 
-.modalOption img {
-  width: 60px;
-  height: 60px;
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.cardImg {
+  width: 100%;
+  height: 150px;
   object-fit: cover;
-  margin-bottom: 5px;
 }
 
-/* 🔹 Details */
-.details {
-  text-align: left;
-  font-size: 1rem;
-  color: #333;
-  margin-bottom: 15px;
+.cardBody {
+  padding: 14px;
 }
 
-.details p {
-  margin: 5px 0;
+.cardName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
 }
 
-/* 🔹 Quantity Selector */
-.quantityContainer {
+.cardPrice {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.bookBtn {
+  width: 100%;
+  padding: 10px;
+  background: #111827;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity .15s;
+}
+
+.bookBtn:hover {
+  opacity: .85;
+}
+
+/* ==== Modal ==== */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,0.35);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 15px;
+  z-index: 200;
 }
 
-.quantityBtn {
-  background: transparent;
-  border: 2px solid #6a0dad;
-  color: #6a0dad;
-  padding: 5px 12px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border-radius: 8px;
+.modal {
+  background: #fff;
+  padding: 22px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Gender Selection */
+.genderRow {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.genderCard {
+  width: 100px;
+  padding: 14px;
+  text-align: center;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: transform .15s, box-shadow .15s;
 }
 
-.quantityBtn:hover {
-  color: black;
+.genderCard img {
+  width: 60px;
+  height: 60px;
 }
 
-.quantityValue {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333;
-  margin: 0 12px;
+.genderCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
-/* 🔹 Add to Cart Button */
-.addToCartButton {
-  background: #6a00ff;
-  color: white;
-  padding: 8px 10px;
-  font-size: 1rem;
-  border-radius: 8px;
+/* Confirmation Summary */
+.summaryBox {
+  margin-bottom: 18px;
+  font-size: 15px;
+  color: #111827;
+}
+
+.qtyRow {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.qtyRow button {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #f3f4f6;
+  border: none;
+  font-size: 18px;
   cursor: pointer;
-  transition: 0.1s ease;
-  margin-right: 15px;
 }
 
-.addToCartButton:hover {
-  background: #000000;
+.qtyRow span {
+  font-size: 18px;
+  font-weight: 600;
 }
 
-/* 🔹 Close Button */
-.closeButton {
-  background: #dc3545;
-  color: white;
-  padding: 8px 15px;
-  font-size: 1rem;
-  border-radius: 8px;
+/* Add to Cart Button */
+.addCartBtn {
+  width: 100%;
+  background: #111827;
+  color: #fff;
+  padding: 12px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
   cursor: pointer;
-  transition: 0.3s ease;
   margin-top: 10px;
 }
 
-.closeButton:hover {
-  background: #c82333;
-}
-
-/* 🔹 Responsive Design */
-@media (max-width: 1024px) {
-  .servicesWrapper {
-    max-width: 90%;
-  }
-}
-
-@media (max-width: 768px) {
-  .servicesWrapper {
-    max-width: 95%;
-  }
-
-  .serviceBox {
-    width: 80%;
-    margin: auto;
-  }
-
-  .scrollContainer {
-    flex-direction: column;
-  }
-
-  .modalOptions {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .boxContainer {
-    width: 95%;
-    padding: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .servicetitle {
-    font-size: 24px;
-  }
-
-  .serviceBox {
-    width: 95%;
-  }
-
-  .serviceBox p {
-    font-size: 16px;
-  }
-
-  .modalOption img {
-    width: 50px;
-    height: 50px;
-  }
-
-  .modalTitle {
-    font-size: 1.2rem;
-  }
-
-  .quantityBtn {
-    font-size: 1rem;
-    padding: 4px 10px;
-  }
-
-  .quantityValue {
-    font-size: 1rem;
-  }
-
-  .addToCartButton,
-  .closeButton {
-    font-size: 0.9rem;
-    padding: 6px 10px;
-  }
+.closeBtn {
+  margin-top: 12px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: #e5e7eb;
+  border-radius: 10px;
+  cursor: pointer;
 }

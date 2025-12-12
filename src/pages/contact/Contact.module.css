@@ -1,115 +1,151 @@
-/* Overall Page Styling */
+/* ============================================================
+   CONTACT PAGE — Modern Professional UI
+============================================================ */
+
 .contactContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* min-height: 100vh; */
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    padding:100px;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  background: #f8fafc;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
 }
 
-/* Contact Form Box */
 .contactBox {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 500px;
-    text-align: center;
-    color: white;
+  width: 100%;
+  max-width: 650px;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 18px;
+  border: 1px solid #e5eaf0;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.4s ease;
 }
 
-/* Title & Description */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .contactBox h1 {
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 10px;
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: #111827;
 }
 
 .contactBox p {
-    font-size: 16px;
-    margin-bottom: 20px;
-    color: #f1f1f1;
+  font-size: 15px;
+  color: #4b5563;
+  margin-bottom: 20px;
 }
 
-/* Input Fields */
+/* ============================================================
+   FORM
+============================================================ */
+
 .contactForm {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 30px;
 }
 
-.input,
-.textarea {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: 0.3s;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    outline: none;
-}
-
-.input::placeholder,
-.textarea::placeholder {
-    color: #e0e0e0;
+.input, .textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #d8dee9;
+  background: #f7f9fc;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s ease;
 }
 
 .input:focus,
 .textarea:focus {
-    background: rgba(255, 255, 255, 0.3);
-    border-left: 4px solid #ffd700;
-    padding-left: 16px;
+  border-color: #007bff;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
 }
 
-/* Textarea Styling */
 .textarea {
-    height: 120px;
-    resize: none;
+  height: 130px;
+  resize: none;
 }
 
-/* Submit Button */
 .submitButton {
-    background: #ffd700;
-    color: #333;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  color: white;
+  padding: 14px;
+  border: none;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.25s ease;
 }
 
 .submitButton:hover {
-    background: #ffcc00;
-    transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,123,255,0.35);
 }
 
-/* Help Section */
+/* ============================================================
+   HELP SECTION
+============================================================ */
+
 .helpSection {
-    margin-top: 20px;
-    font-size: 14px;
-    text-align: center;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #e5eaf0;
 }
 
 .helpSection h3 {
-    font-size: 18px;
-    margin-top: 15px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 6px;
 }
 
-.helpLink,
+.helpSection p {
+  font-size: 14px;
+  color: #4b5563;
+  margin-bottom: 8px;
+}
+
+.helpLink {
+  display: inline-block;
+  margin-top: 6px;
+  font-weight: 600;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.helpLink:hover {
+  text-decoration: underline;
+}
+
 .emailLink {
-    color: #ffd700;
-    font-weight: bold;
-    text-decoration: none;
+  color: #007bff;
+  font-weight: 600;
+  text-decoration: none;
 }
 
-.helpLink:hover,
 .emailLink:hover {
-    text-decoration: underline;
+  text-decoration: underline;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 600px) {
+  .contactBox {
+    padding: 22px;
+  }
+
+  .contactBox h1 {
+    font-size: 26px;
+  }
 }
