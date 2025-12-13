@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import styles from './payment.module.css';
-import { useCart } from '../../components/context/CartContext';
-import { FaCashRegister, FaCreditCard } from 'react-icons/fa';
+import React, { useState } from "react";
+import styles from "./payment.module.css";
+import { useCart } from "../../components/context/CartContext";
+import { FaCashRegister, FaCreditCard } from "react-icons/fa";
 
-import Maid from '../../assets/maid.webp';
-import Cook from '../../assets/chef.webp';
-import Driver from '../../assets/driver.webp';
-import Helper from '../../assets/helper.webp';
-import Iron from '../../assets/iron.webp';
+import Maid from "../../assets/maid.webp";
+import Cook from "../../assets/chef.webp";
+import Driver from "../../assets/driver.webp";
+import Helper from "../../assets/helper.webp";
+import Iron from "../../assets/iron.webp";
 import Cleaning from "../../assets/service1.webp";
 
 const serviceImages = {
@@ -30,38 +30,50 @@ const servicePrices = {
 
 const Checkout = () => {
   const { cart } = useCart();
-  const [paymentMethod, setPaymentMethod] = useState('cash');
-  const [form, setForm] = useState({
-    name: '',
-    phone: '',
-    address: '',
-    pincode: '',
-    city: '',
-    state: '',
-    landmark: '',
-  });
-  const [errors, setErrors] = useState({});
+  const API = import.meta.env.VITE_BACKEND_URL;
+
+  const [paymentMethod, setPaymentMethod] = useState("cash");
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    address: "",
+    pincode: "",
+    city: "",
+    state: "",
+    landmark: "",
+  });
 
   const totalPrice = cart.reduce(
-    (acc, item) => acc + (servicePrices[item.service] || 0) * item.quantity,
+    (acc, item) =>
+      acc + (servicePrices[item.service] || 0) * item.quantity,
     0
   );
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
+  /* ===========================
+     VALIDATION
+  ============================ */
   const validate = () => {
-    const newErrors = {};
-    if (!form.name) newErrors.name = 'Name is required';
-    if (!form.phone || form.phone.length !== 10) newErrors.phone = 'Valid phone number required';
-    if (!form.address) newErrors.address = 'Address is required';
-    if (!form.pincode) newErrors.pincode = 'Pincode is required';
-    if (!form.city) newErrors.city = 'City is required';
-    if (!form.state) newErrors.state = 'State is required';
-    return newErrors;
+    const err = {};
+    if (!form.name) err.name = "Name required";
+    if (!form.phone || form.phone.length !== 10)
+      err.phone = "Valid phone required";
+    if (!form.address) err.address = "Address required";
+    if (!form.pincode) err.pincode = "Pincode required";
+    if (!form.city) err.city = "City required";
+    if (!form.state) err.state = "State required";
+    if (cart.length === 0) err.cart = "Cart is empty";
+    return err;
   };
-  const API = import.meta.env.VITE_BACKEND_URL;
 
+  /* ===========================
+     PLACE ORDER
+  ============================ */
   const handleOrder = async () => {
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
@@ -70,14 +82,8 @@ const Checkout = () => {
     }
 
     const orderData = {
-      name: form.name,
-      phone: form.phone,
-      address: form.address,
-      pincode: form.pincode,
-      city: form.city,
-      state: form.state,
-      landmark: form.landmark,
-      services: cart.map(item => ({
+      ...form,
+      services: cart.map((item) => ({
         service: item.service,
         quantity: item.quantity,
         price: servicePrices[item.service] * item.quantity,
@@ -87,24 +93,29 @@ const Checkout = () => {
     };
 
     setLoading(true);
-    try {
-      const response = await fetch(`${API}/api/orders/place-order`, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify(orderData),
-});
 
-      const data = await response.json();
-      if (response.ok) {
-        alert(data.message || "Order placed successfully!");
-      } else {
-        alert(data.message || "Error placing order");
+    try {
+      const res = await fetch(
+        `${API}/api/orders/place-order`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(orderData),
+        }
+      );
+
+      if (!res.ok) {
+        const text = await res.text(); // ⛔ avoid JSON crash
+        throw new Error(text || "Order failed");
       }
-    } catch (error) {
-      console.error(error);
-      alert("Network or server error. Please try again.");
+
+      const data = await res.json();
+      alert("✅ Order placed successfully");
+      console.log("Order:", data);
+
+    } catch (err) {
+      console.error("Order Error:", err);
+      alert("❌ Failed to place order");
     } finally {
       setLoading(false);
     }
@@ -114,68 +125,104 @@ const Checkout = () => {
     <div className={styles.checkoutContainer}>
       <h2>Checkout</h2>
 
+      {/* ================= SERVICE SUMMARY ================= */}
       <div className={styles.section}>
         <h3>Service Summary</h3>
-        {cart.map((item, index) => (
-          <div key={index} className={styles.itemCard}>
-            <img src={serviceImages[item.service]} alt={item.service} className={styles.itemImage} />
+
+        {cart.map((item, i) => (
+          <div key={i} className={styles.itemCard}>
+            <img
+              src={serviceImages[item.service]}
+              alt={item.service}
+              className={styles.itemImage}
+            />
             <div>
-              <h4>{item.service.charAt(0).toUpperCase() + item.service.slice(1)}</h4>
-              <p>Gender: {item.gender}</p>
-              <p>Duration: {item.duration}</p>
+              <h4>{item.service}</h4>
+              <p>Gender: {item.gender || "Any"}</p>
+              <p>Duration: {item.duration || "-"}</p>
               <p>Quantity: {item.quantity}</p>
-              <p>Price: ₹{(servicePrices[item.service] || 0) * item.quantity}</p>
+              <p>
+                Price: ₹
+                {(servicePrices[item.service] || 0) * item.quantity}
+              </p>
             </div>
           </div>
         ))}
-        <p className={styles.totalPrice}><strong>Total Price:</strong> ₹{totalPrice}</p>
+
+        <p className={styles.totalPrice}>
+          <strong>Total:</strong> ₹{totalPrice}
+        </p>
       </div>
 
+      {/* ================= DELIVERY DETAILS ================= */}
       <div className={styles.section}>
         <h3>Delivery Details</h3>
-        {["name","phone","address","pincode","city","state","landmark"].map(field => (
-          field !== "address" && field !== "landmark" ? (
-            <div key={field}>
-              <input
-                type="text"
-                name={field}
-                placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-                value={form[field]}
-                onChange={handleChange}
-                className={styles.input}
-              />
-              {errors[field] && <p className={styles.error}>{errors[field]}</p>}
-            </div>
-          ) : field === "address" ? (
-            <div key={field}>
-              <textarea
-                name="address"
-                placeholder="Full Address (House No, Street, Area)"
-                value={form.address}
-                onChange={handleChange}
-                className={styles.textarea}
-              />
-              {errors.address && <p className={styles.error}>{errors.address}</p>}
-            </div>
-          ) : (
-            <input key={field} type="text" name="landmark" placeholder="Landmark (optional)" value={form.landmark} onChange={handleChange} className={styles.input} />
-          )
+
+        {["name", "phone", "pincode", "city", "state"].map((field) => (
+          <div key={field}>
+            <input
+              name={field}
+              placeholder={field.toUpperCase()}
+              value={form[field]}
+              onChange={handleChange}
+              className={styles.input}
+            />
+            {errors[field] && (
+              <p className={styles.error}>{errors[field]}</p>
+            )}
+          </div>
         ))}
+
+        <textarea
+          name="address"
+          placeholder="Full Address"
+          value={form.address}
+          onChange={handleChange}
+          className={styles.textarea}
+        />
+        {errors.address && (
+          <p className={styles.error}>{errors.address}</p>
+        )}
+
+        <input
+          name="landmark"
+          placeholder="Landmark (optional)"
+          value={form.landmark}
+          onChange={handleChange}
+          className={styles.input}
+        />
       </div>
 
+      {/* ================= PAYMENT ================= */}
       <div className={styles.section}>
         <h3>Payment Method</h3>
+
         <label className={styles.radioLabel}>
-          <input type="radio" name="payment" value="cash" checked={paymentMethod === 'cash'} onChange={(e) => setPaymentMethod(e.target.value)} />
-          <FaCashRegister /> Payment with cash
+          <input
+            type="radio"
+            value="cash"
+            checked={paymentMethod === "cash"}
+            onChange={(e) => setPaymentMethod(e.target.value)}
+          />
+          <FaCashRegister /> Cash on Delivery
         </label>
+
         <label className={styles.radioLabel}>
-          <input type="radio" name="payment" value="online" checked={paymentMethod === 'online'} onChange={(e) => setPaymentMethod(e.target.value)} />
+          <input
+            type="radio"
+            value="online"
+            checked={paymentMethod === "online"}
+            onChange={(e) => setPaymentMethod(e.target.value)}
+          />
           <FaCreditCard /> Online Payment
         </label>
       </div>
 
-      <button className={styles.orderBtn} onClick={handleOrder} disabled={loading}>
+      <button
+        className={styles.orderBtn}
+        onClick={handleOrder}
+        disabled={loading}
+      >
         {loading ? "Placing Order..." : "Place Order"}
       </button>
     </div>
