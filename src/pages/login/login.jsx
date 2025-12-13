@@ -1,14 +1,13 @@
 import React, { useState, useRef } from "react";
-import { auth, RecaptchaVerifierInstance, googleProvider } from "../../firebase";
+import { auth, googleProvider } from "../../firebase";
 import {
   signInWithEmailAndPassword,
   signInWithPhoneNumber,
   signInWithPopup,
+  RecaptchaVerifier,
 } from "firebase/auth";
 
 import styles from "./login.module.css";
-
-// Icons
 import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Login() {
@@ -25,9 +24,9 @@ export default function Login() {
 
   const otpRefs = useRef([]);
 
-  /* ---------------------------------------
+  /* ===============================
      PASSWORD LOGIN
-  --------------------------------------- */
+  =============================== */
   const handlePasswordLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -35,31 +34,35 @@ export default function Login() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert("Login successful 🎉");
       window.location.href = "/";
     } catch (err) {
       setError(err.message);
     }
+
     setLoading(false);
   };
 
-  /* ---------------------------------------
-     SETUP RECAPTCHA
-  --------------------------------------- */
+  /* ===============================
+     SETUP RECAPTCHA (CORRECT)
+  =============================== */
   const setupRecaptcha = () => {
-    window.recaptchaVerifier = new RecaptchaVerifier(
-      "recaptcha-container",
-      { size: "invisible" },
-      auth
-    );
+    if (!window.recaptchaVerifier) {
+      window.recaptchaVerifier = new RecaptchaVerifier(
+        auth,
+        "recaptcha-container",
+        {
+          size: "invisible",
+        }
+      );
+    }
   };
 
-  /* ---------------------------------------
+  /* ===============================
      SEND OTP
-  --------------------------------------- */
+  =============================== */
   const sendOtp = async () => {
     if (!phone.startsWith("+91")) {
-      setError("Phone must start with +91");
+      setError("Phone number must start with +91");
       return;
     }
 
@@ -68,32 +71,35 @@ export default function Login() {
 
     try {
       setupRecaptcha();
+
+      const appVerifier = window.recaptchaVerifier;
+
       const result = await signInWithPhoneNumber(
         auth,
         phone,
-        window.recaptchaVerifier
+        appVerifier
       );
 
       setConfirmationResult(result);
-      alert("OTP sent ✔");
-
+      alert("OTP sent successfully ✅");
     } catch (err) {
       setError(err.message);
     }
+
     setOtpLoading(false);
   };
 
-  /* ---------------------------------------
+  /* ===============================
      VERIFY OTP
-  --------------------------------------- */
+  =============================== */
   const verifyOtp = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
 
     try {
       const code = otp.join("");
       await confirmationResult.confirm(code);
-      alert("Phone login successful 🎉");
       window.location.href = "/";
     } catch (err) {
       setError("Invalid OTP ❌");
@@ -102,9 +108,9 @@ export default function Login() {
     setLoading(false);
   };
 
-  /* ---------------------------------------
-     HANDLE OTP INPUTS
-  --------------------------------------- */
+  /* ===============================
+     OTP INPUT HANDLER
+  =============================== */
   const handleOtpChange = (value, index) => {
     if (isNaN(value)) return;
 
@@ -112,19 +118,20 @@ export default function Login() {
     newOtp[index] = value;
     setOtp(newOtp);
 
-    if (value && index < 5) otpRefs.current[index + 1].focus();
+    if (value && index < 5) {
+      otpRefs.current[index + 1]?.focus();
+    }
   };
 
-  /* ---------------------------------------
+  /* ===============================
      GOOGLE LOGIN
-  --------------------------------------- */
+  =============================== */
   const handleGoogleLogin = async () => {
     setLoading(true);
     setError("");
 
     try {
       await signInWithPopup(auth, googleProvider);
-      alert("Login successful 🎉");
       window.location.href = "/";
     } catch (err) {
       setError("Google login failed");
@@ -138,7 +145,7 @@ export default function Login() {
       <div className={styles.card}>
         <h2 className={styles.title}>Login</h2>
 
-        {/* SWITCHER BUTTON */}
+        {/* SWITCH */}
         <div className={styles.switcher}>
           <button
             className={method === "password" ? styles.activeBtn : ""}
@@ -146,7 +153,6 @@ export default function Login() {
           >
             Password
           </button>
-
           <button
             className={method === "otp" ? styles.activeBtn : ""}
             onClick={() => setMethod("otp")}
@@ -155,7 +161,7 @@ export default function Login() {
           </button>
         </div>
 
-        {/* ---------------- PASSWORD LOGIN FORM ---------------- */}
+        {/* PASSWORD LOGIN */}
         {method === "password" && (
           <form onSubmit={handlePasswordLogin} className={styles.form}>
             <input
@@ -166,7 +172,6 @@ export default function Login() {
               required
             />
 
-            {/* Password field with toggle */}
             <div className={styles.passwordWrapper}>
               <input
                 type={showPassword ? "text" : "password"}
@@ -175,7 +180,6 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-
               <span
                 className={styles.eyeIcon}
                 onClick={() => setShowPassword(!showPassword)}
@@ -184,27 +188,26 @@ export default function Login() {
               </span>
             </div>
 
-            <button type="submit" className={styles.loginBtn}>
+            <button className={styles.loginBtn}>
               {loading ? "Logging in..." : "Login"}
             </button>
-
-            <p className={styles.forgotText}>Forgot password?</p>
           </form>
         )}
 
-        {/* ---------------- OTP LOGIN FORM ---------------- */}
+        {/* OTP LOGIN */}
         {method === "otp" && (
           <form onSubmit={verifyOtp} className={styles.form}>
             {!confirmationResult ? (
               <>
                 <input
                   type="tel"
-                  placeholder="+91 9876543210"
+                  placeholder="+91XXXXXXXXXX"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   required
                 />
 
+                {/* REQUIRED */}
                 <div id="recaptcha-container"></div>
 
                 <button
@@ -225,12 +228,14 @@ export default function Login() {
                       className={styles.otpInput}
                       maxLength="1"
                       value={digit}
-                      onChange={(e) => handleOtpChange(e.target.value, i)}
+                      onChange={(e) =>
+                        handleOtpChange(e.target.value, i)
+                      }
                     />
                   ))}
                 </div>
 
-                <button type="submit" className={styles.loginBtn}>
+                <button className={styles.loginBtn}>
                   {loading ? "Verifying..." : "Verify OTP"}
                 </button>
               </>
@@ -238,7 +243,7 @@ export default function Login() {
           </form>
         )}
 
-        {/* GOOGLE LOGIN BUTTON */}
+        {/* GOOGLE LOGIN */}
         <button onClick={handleGoogleLogin} className={styles.googleBtn}>
           <FaGoogle /> Continue with Google
         </button>

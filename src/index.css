@@ -1,129 +1,71 @@
-/* ===============================
-   GLOBAL IMPORTS
-================================= */
 @import "leaflet/dist/leaflet.css";
 
-/* ===============================
-   RESET + BASE
-================================= */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
-  font-family: "Inter", sans-serif;
-  overflow-x: hidden !important; /* Prevent sideways scroll */
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  scroll-behavior: smooth;
-  transition: background 0.3s ease, color 0.3s ease;
-  position: relative;
-}
-
-/* ===============================
+/* ============================
    THEME VARIABLES
-================================= */
+============================ */
+
+/* LIGHT MODE (DEFAULT) */
+/* default (light) */
 :root {
-  --bg-color: #ffffff;
-  --text-color: #111;
-  --card: #f9f9f9;
+  --bg: #ffffff;
+  --text: #111827;
+  --card: #f7f9fc;
   --border: #e5e7eb;
-  --accent: #007bff;
-  --accent-2: #00c6ff;
 }
 
+/* dark mode */
+html[data-theme="dark"] {
+  --bg: #0b1220;
+  --text: #e5e7eb;
+  --card: #111827;
+  --border: rgba(255,255,255,0.1);
+}
+
+/* apply globally */
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+
+/* DARK MODE */
 [data-theme="dark"] {
-  --bg-color: #0f172a;
-  --text-color: #e2e8f0;
-  --card: #1e293b;
-  --border: rgba(255, 255, 255, 0.08);
+  --bg: #0f172a;
+  --card: #020617;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --border: #1e293b;
+  --accent: #60a5fa;
 }
 
-/* ===============================
-   CONTENT AREA
-================================= */
+/* ============================
+   BASE STYLES
+============================ */
 
+html,
+body {
+  height: 100%;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* MAIN CONTENT */
 .main-content {
   flex: 1;
-  width: 100%;
   padding: 20px;
-  overflow-y: auto;
-  background: var(--bg-color);
 }
-
-/* Prevent white background flashing */
-body, .main-content {
-  background: var(--bg-color);
-}
-
-/* ===============================
-   SCROLLBAR (Modern)
-================================= */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-color);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-2);
-}
-
-/* ===============================
-   LEAFLET FIXES
-================================= */
-
-/* Prevent Leaflet marker shifting bug */
-.leaflet-container {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-/* Ensure modals with map show properly */
-.leaflet-pane {
-  z-index: 400 !important;
-}
-
-.leaflet-control {
-  z-index: 500 !important;
-}
-
-/* Fix for blurry tiles during transitions */
-.leaflet-container img {
-  image-rendering: crisp-edges;
-}
-
-/* ===============================
-   GLOBAL UTILITY CLASSES
-================================= */
-
-.hidden {
-  display: none !important;
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Mobile safe padding for all page content */
-@media (max-width: 600px) {
-  .contentWrapper {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
-}
-

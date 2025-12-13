@@ -3,7 +3,7 @@
 ========================================================= */
 
 :root {
-  --bg: #ffffff;
+  --bg: linear-gradient(135deg, #a6c1ee, #fbc2eb);
   --card: #f7f9fc;
   --muted: #6b7280;
   --text: #111827;

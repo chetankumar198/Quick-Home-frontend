@@ -1,202 +1,223 @@
-/* MyAccount.module.css */
-:root {
-  --bg: #ffffff;
-  --muted: #6b7280;
-  --text: #111827;
-  --accent: #007bff;
-  --card: #f7f9fc;
-  --shadow: 0 12px 40px rgba(2,6,23,0.06);
-}
+/* ===============================
+   ACCOUNT PAGE LAYOUT
+================================ */
 
 .accountContainer {
   display: flex;
-  gap: 24px;
-  max-width: 1220px;
-  margin: 28px auto;
-  padding: 0 16px;
-  align-items: flex-start;
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(135deg, #a6c1ee, #fbc2eb);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Sidebar */
+/* ===============================
+   SIDEBAR
+================================ */
+
 .sidebar {
-  width: 260px;
-  min-height: 360px;
+  width: 280px;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  padding: 20px;
 }
 
 .profileCard {
-  background: var(--bg);
-  border-radius: 12px;
-  padding: 18px;
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(0,0,0,0.03);
-  text-align: center;
-}
-
-.avatarWrap {
-  width: 92px;
-  height: 92px;
-  margin: 0 auto 12px;
-  border-radius: 999px;
-  overflow: hidden;
-  border: 3px solid rgba(0,0,0,0.04);
-}
-
-.avatar {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 
+/* Avatar */
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--accent);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.35);
+}
+
+/* Name */
 .profileCard h3 {
-  margin: 4px 0;
+  margin-top: 8px;
   font-size: 18px;
+  font-weight: 700;
   color: var(--text);
 }
 
 .smallText {
-  color: var(--muted);
   font-size: 13px;
-  margin-bottom: 12px;
+  color: var(--muted);
+  text-align: center;
 }
 
-.sidebarButtons {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 12px 0;
-}
-
-.sidebarButtons button {
+/* Sidebar buttons */
+.profileCard button {
+  width: 100%;
   padding: 10px 12px;
-  background: transparent;
-  border: 1px solid rgba(0,0,0,0.04);
+  margin-top: 6px;
+  background: #f3f4f6;
+  border: none;
   border-radius: 8px;
-  cursor: pointer;
   font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.activeBtn {
-  background: linear-gradient(90deg, var(--accent), #00b7ff);
-  color: white;
-  border: none !important;
-  box-shadow: 0 8px 24px rgba(0,123,255,0.12);
+.profileCard button:hover {
+  background: #e0e7ff;
+  color: #1d4ed8;
 }
 
 .logoutBtn {
-  margin-top: 10px;
-  width: 100%;
-  padding: 10px;
-  background: #fff;
-  border-radius: 8px;
-  border: 1px solid rgba(0,0,0,0.06);
-  cursor: pointer;
+  background: #fee2e2 !important;
+  color: #b91c1c;
 }
 
-/* Main area */
+.logoutBtn:hover {
+  background: #fecaca !important;
+}
+
+/* ===============================
+   MAIN CONTENT
+================================ */
+
 .main {
   flex: 1;
+  padding: 24px;
 }
 
-.title {
-  font-size: 20px;
-  margin-bottom: 12px;
-  color: var(--text);
-}
-
+/* Card */
 .card {
-  background: var(--bg);
-  border-radius: 12px;
-  padding: 18px;
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(0,0,0,0.03);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+  max-width: 620px;
 }
 
-/* Form fields */
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+/* ===============================
+   FORM ELEMENTS
+================================ */
 
-.field span {
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.field input,
-.field select,
-.field textarea {
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid rgba(0,0,0,0.06);
+.card input,
+.card select {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
   font-size: 14px;
-  color: var(--text);
+  outline: none;
+}
+
+.card input:focus,
+.card select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.card select {
   background: #fff;
 }
 
-.row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.actions {
-  margin-top: 8px;
-}
-
-.actions button {
-  padding: 10px 14px;
-  background: linear-gradient(90deg, var(--accent), #00b7ff);
-  color: #fff;
-  border-radius: 8px;
+/* Buttons inside card */
+.card button {
+  padding: 12px 18px;
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
   border: none;
-  cursor: pointer;
+  border-radius: 10px;
+  color: #ffffff;
   font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* addresses list */
+.card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+}
+
+/* ===============================
+   ADDRESS LIST
+================================ */
+
 .addressList {
   margin-top: 12px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .addressItem {
-  padding: 10px;
-  border-radius: 8px;
-  background: var(--card);
-  border: 1px solid rgba(0,0,0,0.03);
+  padding: 12px;
+  border-radius: 10px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
 }
 
-/* orders */
-.orderItem {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid rgba(0,0,0,0.04);
-  background: #fff;
-  margin-bottom: 10px;
+.addressItem strong {
+  font-size: 14px;
 }
 
-/* progress & messages */
-.progress {
+.addressItem div {
   font-size: 13px;
-  color: var(--muted);
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* ===============================
+   LOADING + MESSAGE
+================================ */
+
+.loading {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 40px;
 }
 
 .message {
-  margin-top: 8px;
-  color: var(--accent);
+  margin-top: 14px;
+  padding: 12px;
+  background: #ecfeff;
+  color: #0369a1;
+  border-radius: 10px;
+  font-size: 14px;
   font-weight: 600;
 }
 
-/* small screen */
-@media (max-width: 920px) {
-  .accountContainer { flex-direction: column; padding: 12px; }
-  .sidebar { width: 100%; order: 2; }
-  .main { order: 1; }
+/* ===============================
+   PROGRESS BAR
+================================ */
+
+.progress {
+  font-size: 13px;
+  margin-top: 6px;
+  color: #2563eb;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+  .accountContainer {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .main {
+    padding: 16px;
+  }
+
+  .card {
+    max-width: 100%;
+  }
 }

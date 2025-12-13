@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #007bff, #7b3cff);
+  background: linear-gradient(135deg, #87b3e3, #9b76ed);
   padding: 20px;
 }
 
@@ -154,9 +154,9 @@
   margin-top: 18px;
   padding: 12px;
   border-radius: 12px;
-  border: 1px solid white;
+  border: 1px solid rgb(48, 45, 45);
   background: rgba(255, 255, 255, 0.22);
-  color: white;
+  color: rgb(54, 48, 48);
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;

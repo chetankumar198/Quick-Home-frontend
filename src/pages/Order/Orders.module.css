@@ -1,6 +1,6 @@
 .ordersContainer {
   padding: 2rem;
-  background-color: #f8f9fa;
+  background-color:linear-gradient(135deg, #a6c1ee, #fbc2eb);;
   min-height: 100vh;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
