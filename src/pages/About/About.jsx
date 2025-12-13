@@ -2,8 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import styles from "./About.module.css"; // Import CSS
 import { FaClock, FaUserCheck, FaStar, FaHeadset } from "react-icons/fa";
-import aboutImage from "../../assets/maid3.jpg"; // Hero Image
-import teamImage from "../../assets/maid2.jpg"; // Team Image
+import teamImage from "../../assets/maid3.jpg"; // Hero Image
+import aboutImage from "../../assets/maid2.jpg"; // Team Image
 
 const About = () => {
 

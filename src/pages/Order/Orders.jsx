@@ -24,6 +24,8 @@ const genderIcons = {
   female: FemaleIcon,
   any: AnyIcon,
 };
+const API = import.meta.env.VITE_BACKEND_URL;
+
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -53,7 +55,13 @@ const Orders = () => {
     }).toString();
 
     try {
-      const res = await fetch(`http://localhost:5000/api/orders/all?${query}`);
+      const res = await fetch(`${API}/api/orders/all?${query}`, {
+  method: "GET",
+  credentials: "include",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
       const data = await res.json();
       const newOrders = data.orders || [];
 

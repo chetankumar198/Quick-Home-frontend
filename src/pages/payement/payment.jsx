@@ -60,6 +60,7 @@ const Checkout = () => {
     if (!form.state) newErrors.state = 'State is required';
     return newErrors;
   };
+  const API = import.meta.env.VITE_BACKEND_URL;
 
   const handleOrder = async () => {
     const validationErrors = validate();
@@ -87,12 +88,13 @@ const Checkout = () => {
 
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/orders/place-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(orderData),
-        mode: 'cors', // ensures proper CORS
-      });
+      const response = await fetch(`${API}/api/orders/place-order`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(orderData),
+});
 
       const data = await response.json();
       if (response.ok) {
