@@ -10,6 +10,7 @@ import Helper from "../../assets/helper.webp";
 import Iron from "../../assets/iron.webp";
 import Cleaning from "../../assets/service1.webp";
 
+// ================= IMAGE MAP =================
 const serviceImages = {
   maid: Maid,
   cook: Cook,
@@ -19,6 +20,7 @@ const serviceImages = {
   cleaning: Cleaning,
 };
 
+// ================= UNIT PRICE MAP =================
 const servicePrices = {
   maid: 50,
   laundry: 30,
@@ -29,7 +31,7 @@ const servicePrices = {
 };
 
 const Checkout = () => {
-  const { cart } = useCart();
+  const { cart, clearCart } = useCart();
   const API = import.meta.env.VITE_BACKEND_URL;
 
   const [paymentMethod, setPaymentMethod] = useState("cash");
@@ -46,22 +48,21 @@ const Checkout = () => {
     landmark: "",
   });
 
-  const totalPrice = cart.reduce(
-    (acc, item) =>
-      acc + (servicePrices[item.service] || 0) * item.quantity,
-    0
-  );
+  // ================= TOTAL PRICE =================
+  const totalPrice = cart.reduce((acc, item) => {
+    const unitPrice = servicePrices[item.service];
+    if (!unitPrice) return acc;
+    return acc + unitPrice * Number(item.quantity || 0);
+  }, 0);
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  /* ===========================
-     VALIDATION
-  ============================ */
+  // ================= VALIDATION =================
   const validate = () => {
     const err = {};
     if (!form.name) err.name = "Name required";
-    if (!form.phone || form.phone.length !== 10)
+    if (!form.phone || String(form.phone).length !== 10)
       err.phone = "Valid phone required";
     if (!form.address) err.address = "Address required";
     if (!form.pincode) err.pincode = "Pincode required";
@@ -71,9 +72,7 @@ const Checkout = () => {
     return err;
   };
 
-  /* ===========================
-     PLACE ORDER
-  ============================ */
+  // ================= PLACE ORDER =================
   const handleOrder = async () => {
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
@@ -81,41 +80,57 @@ const Checkout = () => {
       return;
     }
 
-    const orderData = {
-      ...form,
-      services: cart.map((item) => ({
-        service: item.service,
-        quantity: item.quantity,
-        price: servicePrices[item.service] * item.quantity,
-      })),
-      totalPrice,
-      paymentMethod,
-    };
-
-    setLoading(true);
-
     try {
-      const res = await fetch(
-        `${API}/api/orders/place-order`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(orderData),
-        }
-      );
+      // 🔒 HARD NORMALIZATION (backend-safe)
+      const services = cart.map((item) => {
+        const unitPrice = servicePrices[item.service];
 
-      if (!res.ok) {
-        const text = await res.text(); // ⛔ avoid JSON crash
-        throw new Error(text || "Order failed");
-      }
+        if (unitPrice === undefined) {
+          throw new Error(`Invalid service: ${item.service}`);
+        }
+
+        return {
+          service: item.service.toLowerCase(),
+          quantity: Number(item.quantity),
+          price: Number(unitPrice), // UNIT PRICE ONLY
+        };
+      });
+
+      const orderData = {
+        name: form.name,
+        phone: String(form.phone),
+        address: form.address,
+        pincode: String(form.pincode),
+        city: form.city,
+        state: form.state,
+        landmark: form.landmark,
+        paymentMethod,
+        services,
+        totalPrice: Number(totalPrice),
+      };
+
+      console.log("📦 ORDER DATA SENT:", orderData);
+
+      setLoading(true);
+
+      const res = await fetch(`${API}/api/orders/place-order`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData),
+      });
 
       const data = await res.json();
-      alert("✅ Order placed successfully");
-      console.log("Order:", data);
 
+      if (!res.ok) {
+        throw new Error(data?.error || data?.message || "Order failed");
+      }
+
+      alert("✅ Order placed successfully");
+      clearCart(); // ✅ FIXED: now exists
+      console.log("Order saved:", data);
     } catch (err) {
-      console.error("Order Error:", err);
-      alert("❌ Failed to place order");
+      console.error("❌ Order Error:", err.message);
+      alert(err.message);
     } finally {
       setLoading(false);
     }
@@ -143,7 +158,8 @@ const Checkout = () => {
               <p>Quantity: {item.quantity}</p>
               <p>
                 Price: ₹
-                {(servicePrices[item.service] || 0) * item.quantity}
+                {(servicePrices[item.service] || 0) *
+                  Number(item.quantity || 0)}
               </p>
             </div>
           </div>

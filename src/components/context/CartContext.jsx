@@ -1,25 +1,44 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 const CartContext = createContext();
 
-export const useCart = () => {
-    return useContext(CartContext);
-};
+export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-    const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const stored = localStorage.getItem("cart");
+    return stored ? JSON.parse(stored) : [];
+  });
 
-    const addToCart = (service) => {
-        setCart([...cart, service]);
-    };
+  // 🔄 Sync cart with localStorage
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
-    const removeFromCart = (index) => {
-        setCart(cart.filter((_, i) => i !== index));
-    };
+  const addToCart = (service) => {
+    setCart((prev) => [...prev, service]);
+  };
 
-    return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
-            {children}
-        </CartContext.Provider>
-    );
+  const removeFromCart = (index) => {
+    setCart((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  // ✅ THIS WAS MISSING (CRITICAL)
+  const clearCart = () => {
+    setCart([]);
+    localStorage.removeItem("cart");
+  };
+
+  return (
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        clearCart,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 };
