@@ -4,14 +4,14 @@
 
 :root {
   --bg: linear-gradient(135deg, #a6c1ee, #fbc2eb);
-  --card: #ffffff;
+  --card: #f7f9fc;
   --muted: #6b7280;
   --text: #111827;
   --accent: #007bff;
   --accent-2: #00c3ff;
   --border: #e6eef6;
-  --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  --header-h: 68px;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --maxw: 1280px;
 }
 
 html.dark {
@@ -30,23 +30,23 @@ html.dark {
 ========================================================= */
 
 .header {
+  width: 100%;
   position: sticky;
   top: 0;
-  z-index: 2000;
+  z-index: 200;
   background: var(--bg);
-  height: var(--header-h);
+  border-bottom: 1px solid var(--border);
   box-shadow: var(--shadow);
 }
 
 .container {
-  max-width: 1280px;
+  max-width: var(--maxw);
   margin: auto;
-  padding: 0 14px;
-  height: 100%;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 18px;
 }
 
 /* =========================================================
@@ -56,12 +56,12 @@ html.dark {
 .left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .menuBtn {
   display: none;
-  background: none;
+  background: transparent;
   border: none;
   cursor: pointer;
 }
@@ -71,7 +71,8 @@ html.dark {
 }
 
 .logoImage {
-  height: 42px;
+  height: 46px;
+  width: auto;
 }
 
 /* =========================================================
@@ -82,11 +83,13 @@ html.dark {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 10px;
+  padding: 4px 10px;
+  height: 34px;
+  border-radius: 8px;
   background: var(--card);
-  border-radius: 10px;
   border: 1px solid var(--border);
   cursor: pointer;
+  transition: 0.18s ease;
 }
 
 .headerLocation:hover {
@@ -97,12 +100,13 @@ html.dark {
 
 .headerLocationIcon {
   font-size: 16px;
+  color: var(--accent);
 }
-
 
 .headerLocationText {
   display: flex;
   flex-direction: column;
+  line-height: 1.05;
 }
 
 .locLabel {
@@ -114,8 +118,8 @@ html.dark {
   font-size: 12px;
   font-weight: 600;
   max-width: 120px;
-  white-space: nowrap;
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
 }
 
@@ -131,45 +135,53 @@ html.dark {
 }
 
 .searchBox {
-  width: 420px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  background: var(--card);
+  gap: 10px;
+  width: 450px;
+  max-width: 100%;
+  padding: 8px 14px;
   border-radius: 12px;
+  background: var(--card);
   border: 1px solid var(--border);
 }
 
 .searchIcon {
   width: 18px;
+  opacity: 0.8;
 }
 
 .searchInput {
   flex: 1;
   border: none;
   outline: none;
+  background: transparent;
   font-size: 14px;
+  color: var(--text);
 }
 
-/* suggestions */
 .suggestions {
   position: absolute;
-  top: 52px;
-  width: 100%;
-  background: var(--card);
-  border-radius: 12px;
+  top: 54px;
+  width: 450px;
+  max-width: 100%;
+  background: var(--bg);
+  border-radius: 10px;
+  border: 1px solid var(--border);
   box-shadow: var(--shadow);
-  z-index: 3000;
+  z-index: 500;
 }
 
 .suggestion {
-  padding: 10px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   cursor: pointer;
 }
 
 .suggestion:hover {
-  background: rgba(0, 123, 255, 0.08);
+  background: rgba(0, 123, 255, 0.06);
 }
 
 /* =========================================================
@@ -179,28 +191,34 @@ html.dark {
 .right {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
 }
 
 .navItem {
+  padding: 6px 8px;
   text-decoration: none;
   font-weight: 600;
   color: var(--text);
-  padding: 6px 8px;
   border-radius: 6px;
+  transition: 0.2s;
 }
 
 .navItem:hover {
   background: rgba(0, 123, 255, 0.08);
+  color: var(--accent);
 }
 
-/* cart */
+/* Cart */
+
 .cartLink {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .cartIcon {
   width: 26px;
+  height: 26px;
 }
 
 .cartCount {
@@ -212,29 +230,31 @@ html.dark {
   font-size: 11px;
   padding: 2px 6px;
   border-radius: 999px;
+  font-weight: 700;
 }
 
-/* profile */
+/* Profile */
+
 .accountBtn {
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 6px 10px;
-  background: var(--card);
-  border: 1px solid var(--border);
   border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  cursor: pointer;
 }
 
-
 .profileIcon {
-  width: 28px;
+  width: 30px;
+  border-radius: 6px;
 }
 
 .usernameText {
-  font-size: 13px;
   font-weight: 600;
+  color: var(--text);
 }
-
 
 .accountBtn:hover {
   background: var(--card);
@@ -243,22 +263,26 @@ html.dark {
 
 .dropdownMenu {
   position: absolute;
-  right: 14px;
-  top: 64px;
-  background: var(--card);
-  border-radius: 12px;
+  right: 20px;
+  margin-top: 10px;
+  padding: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
   box-shadow: var(--shadow);
-  z-index: 4000;
+  z-index: 999;
 }
 
 .dropdownMenu button {
-  padding: 10px 14px;
   width: 100%;
-  border: none;
+  padding: 10px;
   background: none;
-  text-align: left;
+  border: none;
   cursor: pointer;
+  text-align: left;
+  border-radius: 8px;
 }
+
 .dropdownMenu button:hover {
   background: rgba(0, 123, 255, 0.08);
 }
@@ -267,60 +291,42 @@ html.dark {
    RESPONSIVE
 ========================================================= */
 
-@media (max-width: 1068px) {
-  .menuBtn {
-    display: block;
-  }
-
-  .navItem {
-    display: none;
+@media (max-width: 950px) {
+  .searchBox {
+    width: 350px;
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
+  .headerLocation {
+    display: flex !important;
+    height: 30px;
+    padding: 4px 8px;
+  }
+
   .searchBox {
     width: 260px;
   }
 }
 
-@media (max-width: 768px) {
-  .container {
-    gap: 8px;
+@media (max-width: 1068px) {
+  .menuBtn {
+    display: block;
   }
-
-  .headerLocation {
-    padding: 4px 8px;
-  }
-
   .center {
-    display: flex;
-  }
-
-  .searchBox {
-    width: 100%;
-  }
-
-  .usernameText {
     display: none;
   }
-  
+  .navItem {
+    display: none;
+  }
 }
-
 
 /* =========================================================
    SIDEBAR (MOBILE)
 ========================================================= */
 
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: -100%;
-  width: 260px;
-  height: 100vh;
-  background: var(--bg);
-  padding: 20px;
-  transition: left 0.3s ease;
-  z-index: 5000;
+  display: none;
 }
 
 @media (max-width: 768px) {
@@ -339,21 +345,23 @@ html.dark {
   }
 
   .sidebar.open {
-  left: 0;
-}
+    left: 0;
+  }
 
-.sidebarNav {
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+  .sidebarNav {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
 
-.sidebarNav a {
-  font-size: 16px;
-  text-decoration: none;
-  color: var(--text);
-}
+  .sidebarNav a {
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text);
+  }
+
   .sidebarNav a:hover {
     background: rgba(0, 123, 255, 0.08);
   }
@@ -369,6 +377,9 @@ html.dark {
   right: 14px;
   background: none;
   border: none;
+  padding: 4px;
+  cursor: pointer;
+  z-index: 6001;
 }
 
 .sidebarCloseBtn img {
@@ -390,7 +401,8 @@ html.dark {
 .modalBackdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.55);
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(3px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -398,23 +410,26 @@ html.dark {
 }
 
 .modalContent {
-  width: 92%;
-  max-width: 720px;
-  background: var(--card);
+  width: 90%;
+  max-width: 750px;
+  background: var(--bg);
   border-radius: 16px;
   overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  animation: popupIn 0.3s ease;
 }
-
-.locationPopup {
-  padding: 18px;
-}
-
 
 @keyframes popupIn {
   from { opacity: 0; transform: translateY(-20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
+.locationPopup {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
 .popupHeader {
   display: flex;
